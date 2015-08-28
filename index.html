@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Lendr</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+    
+  <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+
+
+</head>
+<body>
+
+  <!-- Facebook SDK stuff 
+ –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script>
+      // Initialize Parse
+      Parse.initialize("LQ0Hm0OQUegvGFVvQsFO8fOMMCTcxsi7Ti3RuSv9", "OGSYgoriBJN3f4nXZesN0FC5HLV4bwXexITlSjNa");
+
+          window.fbAsyncInit = function() {
+        Parse.FacebookUtils.init({ // this line replaces FB.init({
+          appId      : '871268029625476', // Facebook App ID
+          status     : true,  // check Facebook Login status
+          cookie     : true,  // enable cookies to allow Parse to access the session
+          xfbml      : true,  // initialize Facebook social plugins on the page
+          version    : 'v2.4' // point to the latest Facebook Graph API version
+        });
+
+            // Run code after the Facebook SDK is loaded.
+            console.log("fb sdk loaded");
+            
+            //check if user is logged in
+            var currentUser = Parse.User.current();
+            if (currentUser) {
+                completeLogin();
+            } else {
+                $('.facebook-login').removeClass('hidden');
+            }
+
+      };
+
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        
+       function facebookLogin() {
+        Parse.FacebookUtils.logIn(null, {
+          success: function(user) {
+            if (!user.existed()) {
+              alert("User signed up and logged in through Facebook!");
+            } else {
+              alert("User logged in through Facebook!");
+            }
+            completeLogin();
+          },
+          error: function(user, error) {
+            alert("User cancelled the Facebook login or did not fully authorize.");
+          }
+        });
+       }
+        
+       function completeLogin() {
+        FB.api('/me', function(response) {
+          $('#username').html(response.name);
+        });
+           
+        $('.facebook-login').addClass('hidden');
+        $('.list-items').removeClass('hidden');
+       }
+        
+       function facebookLogout() {
+        Parse.User.logOut();
+        $('.facebook-login').removeClass('hidden');
+        $('.list-items').addClass('hidden');
+       }
+
+        
+    </script>
+    
+  <!-- Login
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container facebook-login hidden">
+      <div class="u-full-width" style="margin-top: 25%">
+        <fb:login-button size="large" scope="public_profile,email" onlogin="facebookLogin();"> Login with Facebook </fb:login-button>
+      </div>
+  </div>
+    
+
+  <!-- List items
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container list-items hidden">
+      <div class="u-full-width" style="margin-top: 25%">
+        <h4>Welcome, <span id="username">_</span>! </h4>
+        <button onClick="facebookLogout();"> Logout</button>
+      </div>
+  </div>
+    
+    
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
