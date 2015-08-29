@@ -3,6 +3,7 @@
 }
 
 .add-item {
+    width:80% !important;
     padding: 10%;
     position: fixed;
     top: 5%;
