@@ -222,6 +222,28 @@ input[type="button"].button-primary:focus {
   background-color: #1EAEDB;
   border-color: #1EAEDB; }
 
+.button.button-simple,
+button.button-simple,
+input[type="submit"].button-simple,
+input[type="reset"].button-simple,
+input[type="button"].button-simple {
+  color: #E1E1E1;
+  background-color: #FFF;
+  border-color: transparent; }
+.button.button-simple:hover,
+button.button-simple:hover,
+input[type="submit"].button-simple:hover,
+input[type="reset"].button-simple:hover,
+input[type="button"].button-simple:hover,
+.button.button-simple:focus,
+button.button-simple:focus,
+input[type="submit"].button-simple:focus,
+input[type="reset"].button-simple:focus,
+input[type="button"].button-simple:focus {
+  color: #CCC;
+  background-color: #FFF;
+  border-color: transparent; }
+
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

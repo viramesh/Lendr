@@ -31,6 +31,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script src="js/main.js"></script>
 
 
 </head>
@@ -109,7 +110,7 @@
   <!-- Login
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container facebook-login hidden">
-      <div class="u-full-width" style="margin-top: 25%">
+      <div class="u-full-width" style="margin-top: 25%; text-align:center">
         <fb:login-button size="large" scope="public_profile,email" onlogin="facebookLogin();"> Login with Facebook </fb:login-button>
       </div>
   </div>
@@ -118,12 +119,39 @@
   <!-- List items
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container list-items hidden">
-      <div class="u-full-width" style="margin-top: 25%">
-        <h4>Welcome, <span id="username">_</span>! </h4>
-        <button onClick="facebookLogout();"> Logout</button>
+      <div class="u-full-width" style="margin-top: 5%; margin-bottom: 5%; text-align:center">
+        <h4 style="margin-bottom:0">Welcome, <span id="username">_</span>!</h4>
+        <button class="button-simple" onClick="facebookLogout();">Logout</button>
+      </div>
+      
+      <div class="row" style="text-align:center">
+        <h6>List things you own that you would like to lend to someone else for money</h6>
+        <div class="container list-items-added">
+            <div class="row row-0">
+            </div>
+        </div>  
+        <button onClick="showAddItem();">Add item</button>
       </div>
   </div>
     
+ <!-- Add item pop up 
+------------------------------------------------------ -->
+ <div class="container add-item hidden">
+      <div class="row">
+          <label for="itemDesc">Description</label>
+          <input class="u-full-width" type="text" placeholder="Duffel Bag, Karoake, Stand mixer, Golf Clubs, etc." id="itemDesc">
+
+          <label for="itemPhoto">Photo</label>
+          <input class="u-full-width" type="file" capture="camera" accept="image/*" id="itemPhoto">
+          <img id="itemPhotoImg" style="max-height:100px" class="itemThumbnail"/>
+          
+          <label for="itemPrice">Price ($ per day)</label>
+          <input class="u-full-width" type="text" placeholder="10" id="itemPrice">
+      </div>
+      <div class="row">
+          <button onClick="addItemToList();">Add</button>
+      </div>
+</div>
     
 
 <!-- End Document
