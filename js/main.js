@@ -26,6 +26,10 @@ function showAddItem() {
     itemImgURL = "";
 }
 
+function cancelAddItem() {
+    $('.add-item').addClass("hidden");
+}
+
 function addItemToList() {
     
     console.log("Adding item to list");
